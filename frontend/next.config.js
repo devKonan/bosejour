@@ -1,0 +1,68 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  // Pour le déploiement sur serveur Node.js, utilisez 'standalone'
+  // Pour un build statique, utilisez 'export'
+  output: process.env.NODE_ENV === 'production' ? 'standalone' : undefined,
+  images: {
+    // Désactive l'optimisation Next pour éviter les erreurs d'upstream (certificat/HTTP)
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ui-avatars.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'apimonbeaupays.loyerpay.ci',
+        pathname: '/storage/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'apimonbeaupays.loyerpay.ci',
+        pathname: '/storage/**',
+      },
+      {
+        protocol: 'http',
+        hostname: '72.62.16.236',
+        pathname: '/storage/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.bosejour.ci',
+        pathname: '/storage/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'bosejour.ci',
+        pathname: '/storage/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.bosejour.ci',
+        pathname: '/api/storage/**',
+      },
+      // Configuration pour le développement local
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '8000',
+        pathname: '/storage/**',
+      },
+    ],
+  },
+}
+
+module.exports = nextConfig
+
